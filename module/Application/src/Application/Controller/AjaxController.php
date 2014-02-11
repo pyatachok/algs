@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Zend Framework (http://framework.zend.com/)
@@ -14,15 +15,13 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 use Application\Services\DynamicConectivityClient;
+use Zend\Mvc\Controller\AbstractRestfulController;
+use Zend\View\Model\JsonModel;
 
-class IndexController extends AbstractActionController
+class AjaxController extends AbstractRestfulController
 {
-    public function indexAction()
-    {
-        return new ViewModel();
-    }
 
-	public function ufAction()
+	public function setConnectionsAction()
 	{
 		$dc = new DynamicConectivityClient();
 
@@ -37,4 +36,3 @@ class IndexController extends AbstractActionController
 	}
 
 }
-
