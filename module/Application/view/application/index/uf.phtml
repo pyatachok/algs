@@ -1,0 +1,42 @@
+<div class="row">
+	<div class="col-md-12">
+		<h1>Union Find</h1>
+		<div class = 'row'>
+			<div class="col-lg-5">
+				<h3>Initializing array</h3>
+				<?php echo 'Size: ' . $this->size; ?><br/>
+
+				<h4>Connections</h4>
+				<?php foreach( $this->connections as $connection ) : ?>
+					<?php echo $connection[0] . ',' . $connection[1] . ';'; ?>
+				<?php endforeach; ?>
+			</div>
+			<div class="col-lg-7">
+				<h3>Output array</h3>
+				<?php if ( ! empty ($this->output) ) : ?>
+					<table class="table table-bordered">
+						<thead>
+							<tr class="active">
+								<?php for ($i =0; $i<$this->size; $i++) : ?>
+									<th><?php echo $i ;?></th>
+								<?php endfor; ?>
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr class="success">
+								<?php foreach( $this->output as $index => $connectedTo ) : ?>
+									<td>
+										<?php echo $connectedTo ; ?>
+									</td>
+								<?php endforeach; ?>
+							</tr>
+						</tbody>
+					</table>
+
+				<?php endif; ?>
+			</div>
+		</div>
+	</div>
+
+</div>
