@@ -1,13 +1,6 @@
 <div class="row">
 	<div class="col-md-12 ">
-		<?php 
-$this->form->prepare();
-echo $this->form()->openTag($this->form);
-echo $this->formRow($this->form->get('size'));
-echo $this->formRow($this->form->get('connections'));
-echo $this->formSubmit($this->form->get('send'));
-echo $this->form()->closeTag(); 
-?>
+		<?php echo $this->form()->render($this->form); ?>
 	</div>
 </div>
 <div class="row">

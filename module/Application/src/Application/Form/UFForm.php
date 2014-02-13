@@ -20,6 +20,7 @@ class UFForm extends Form
 		$this -> setAttribute ( 'action', '/ajax/setConnections' );
 		$this -> setAttribute ( 'method', 'post' );
 		$this -> setInputFilter ( new UFInputFilter () );
+		$this -> setAttribute('role', 'form');
 
 		$this -> add ( array (
 			'name' => 'size',
