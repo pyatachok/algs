@@ -35,3 +35,12 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+/**
+My styles
+*/
+
+.top-padded-s { padding-top: 10px}
+.top-padded-m { padding-top: 50px}
+.top-padded-l { padding-top: 75px}
+.top-padded-xl { padding-top: 100px}

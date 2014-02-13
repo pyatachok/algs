@@ -28,6 +28,11 @@ class UFForm extends Form
 				'label' => 'Size',
 			),
 			'type' => 'Text',
+			'attributes' => [
+				'data-toggle' => "popover",
+				'data-placement' =>"top",
+				'data-content' => ""
+			],
 		) );
 		$this -> add ( array (
 			'name' => 'connections',
@@ -35,6 +40,11 @@ class UFForm extends Form
 				'label' => 'Connections',
 			),
 			'type' => 'Text',
+			'attributes' => [
+				'data-toggle' => "popover",
+				'data-placement' =>"top",
+				'data-content' => ""
+			],
 		) );
 		$this -> add ( array (
 			'name' => 'send',

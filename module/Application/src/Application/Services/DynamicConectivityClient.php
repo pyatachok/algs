@@ -37,8 +37,7 @@ class DynamicConectivityClient
 	public function __construct($inputFile = 'public/txt/w1.txt' )
 	{
 		error_reporting(E_ALL); ini_set('display_errors', 1);
-		$fileHandle = fopen($inputFile, 'r');
-		if ( $fileHandle)
+		if ( $fileHandle = fopen($inputFile, 'r'))
 		{
 			$this->sizeN = (int) fgets($fileHandle);
 			$index = 0;

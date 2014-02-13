@@ -6,6 +6,8 @@ namespace Application\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\NotEmpty;
 use Zend\Validator\Digits;
+use Zend\Validator\Regex;
+
 
 /**
  * Description of UFInputFilter
@@ -22,9 +24,11 @@ class UFInputFilter extends InputFilter
 					'name' => 'size',
 					'required' => true,
 					'validators' => [
+
 						[
-							'name' => 'NotEmpty',
+							'name' => 'Digits',
 						]
+
 					]
 		] );
 		$this -> add (
@@ -33,7 +37,14 @@ class UFInputFilter extends InputFilter
 					'required' => true,
 					'validators' => [
 						[
-							'name' => 'Digits',
+							'name' => 'Regex',
+
+							'options' => [
+								'pattern' => '/^([0-9]+,[0-9]+;?)+$/',
+								'messages' => [
+									Regex::NOT_MATCH => 'Should be like: 0,0;1,1;'
+								]
+							]
 						]
 					]
 				]
