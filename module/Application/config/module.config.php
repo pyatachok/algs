@@ -30,7 +30,7 @@ return array(
                     ),
                 ),
             ),
-			
+
 			'ajax' => array (
 				'type'    => 'Segment',
                         'options' => array(
@@ -85,6 +85,14 @@ return array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
+		'invokables' => array(
+			'UF' => 'Application\UF\UF',
+			'QuickFind' => 'Application\UF\QuickFind',
+			'QuickUnion' => 'Application\UF\QuickUnion',
+			'QuickUnionWithPathCompression' => 'Application\UF\QuickUnionWithPathCompression',
+			'WeightedQuickUnion' => 'Application\UF\WeightedQuickUnion',
+
+		)
     ),
     'translator' => array(
         'locale' => 'en_US',

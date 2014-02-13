@@ -20,7 +20,10 @@ class UFForm extends Form
 		$this -> setAttribute ( 'action', '/ajax/setConnections' );
 		$this -> setAttribute ( 'method', 'post' );
 		$this -> setInputFilter ( new UFInputFilter () );
-		$this -> setAttribute('role', 'form');
+		$this -> setAttributes([
+			'role' 		=> 'form',
+			'class'		=> 'form-horizontal uf-form'
+		]);
 
 		$this -> add ( array (
 			'name' => 'size',
@@ -29,8 +32,9 @@ class UFForm extends Form
 			),
 			'type' => 'Text',
 			'attributes' => [
+				'id' => 'uf-size',
 				'data-toggle' => "popover",
-				'data-placement' =>"top",
+				'data-placement' =>"right",
 				'data-content' => ""
 			],
 		) );
@@ -41,11 +45,29 @@ class UFForm extends Form
 			),
 			'type' => 'Text',
 			'attributes' => [
+				'id' => 'uf-connections',
 				'data-toggle' => "popover",
-				'data-placement' =>"top",
+				'data-placement' =>"right",
 				'data-content' => ""
 			],
 		) );
+		$this->add(array(
+			'name' => 'algorithm',
+			'type' => 'Radio',
+			'options' => [
+				'label' => 'Chose Atgorithm',
+				'value_options' => [
+					'QuickFind' => 'Quick Find',
+					'QuickUnion' => 'Quick Union',
+					'QuickUnionWithPathCompression' => 'Quick Union With Path Compression',
+					'WeightedQuickUnion' => 'Weighted Quick Union'
+
+				],
+			],
+			'attributes' => [
+				'class' => 'uf-radio'
+			]
+			));
 		$this -> add ( array (
 			'name' => 'send',
 			'type' => 'Submit',

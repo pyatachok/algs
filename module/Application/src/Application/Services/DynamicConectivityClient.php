@@ -23,6 +23,12 @@ class DynamicConectivityClient
 	 */
 	private $sizeN = 0;
 
+	private $algorithmClass = [
+		'QuickFind' => 'Application\UF\QuickFind',
+		'QuickUnion' => 'Application\UF\QuickUnion',
+		'QuickUnionWithPathCompression' => 'Application\UF\QuickUnionWithPathCompression',
+		'WeightedQuickUnion' => 'Application\UF\WeightedQuickUnion',
+	];
 
 	/**
 	 * @var array
@@ -39,9 +45,15 @@ class DynamicConectivityClient
 		error_reporting(E_ALL); ini_set('display_errors', 1);
 		if ( $fileHandle = fopen($inputFile, 'r'))
 		{
+			$algorithmClass =  (string) trim(fgets($fileHandle)) ;
 			$this->sizeN = (int) fgets($fileHandle);
 			$index = 0;
-			$ufClient = new QuickFind($this->getSizeN());
+			if( !class_exists($this->algorithmClass[$algorithmClass]))
+			{
+				$algorithmClass = 'QuickUnion';
+				echo 'Sorry could not find algorithm';
+			}
+			$ufClient = new $this->algorithmClass[$algorithmClass] ($this->getSizeN());
 
 			while ( ( $buffer = fgets($fileHandle, 1024)) !== false)
 			{
@@ -64,13 +76,13 @@ class DynamicConectivityClient
 
 			if (!feof($fileHandle)) {
 
-				echo "Error: unexpected fgets() fail\n";
+				echo "Error: unexpected fgets() fail";
 			}
 			fclose($fileHandle);
 		}
 		else
 		{
-			echo "Error: could not open {$inputFile}\n";
+			echo "Error: could not open {$inputFile}";
 		}
 
 

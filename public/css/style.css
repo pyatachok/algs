@@ -44,3 +44,5 @@ My styles
 .top-padded-m { padding-top: 50px}
 .top-padded-l { padding-top: 75px}
 .top-padded-xl { padding-top: 100px}
+
+.uf-form .uf-form-listed label { display: block }

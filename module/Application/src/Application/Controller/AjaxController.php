@@ -39,6 +39,7 @@ class AjaxController extends AbstractActionController
 			{
 				$size = $this->params()->fromPost('size', 0);
 				$connectionsStr = $this->params()->fromPost('connections', '');
+				$algorithmClass = $this->params()->fromPost('algorithm');
 				$connections = array_map(function ($item){
 					return explode(',', $item);
 				}, explode(';', $connectionsStr));
@@ -47,6 +48,7 @@ class AjaxController extends AbstractActionController
 				if ( $fileHandle = fopen($inputFile, 'w'))
 				{
 
+					fwrite($fileHandle, $algorithmClass . "\n");
 					fwrite($fileHandle, $size . "\n");
 					foreach ( $connections as $connection)
 					{

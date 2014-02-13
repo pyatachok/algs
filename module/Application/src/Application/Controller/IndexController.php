@@ -24,6 +24,7 @@ class IndexController extends AbstractActionController
 
 	public function ufAction()
 	{
+		$form = new UFForm();
 		$dc = new DynamicConectivityClient();
 
 		return new ViewModel(

@@ -3,7 +3,6 @@ $(document).ready(function(){
 		var data = $(this).serialize();
 		var $input_size = $('input[name="size"]');
 		var $input_connections = $('input[name="connections"]');
-
 		$.ajax({
 			url:'/ajax/setConnections',
 			dataType: 'json',
