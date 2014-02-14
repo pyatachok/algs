@@ -72,7 +72,8 @@ class UFForm extends Form
 			'name' => 'send',
 			'type' => 'Submit',
 			'attributes' => array (
-				'value' => 'Submit',
+				'value' => 'Get Result Array',
+				'class' => 'btn btn-default',
 			),
 		) );
 	}
