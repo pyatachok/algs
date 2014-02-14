@@ -33,6 +33,7 @@ class IndexController extends AbstractActionController
 			'connections' 	=> $dc->getConnections(),
 			'output' 		=> $dc->getOutput(),
 			'form'			=> new UFForm(),
+			'algorithm' 	=> $dc->getAlgorithmClass(),
 
 		]);
 	}

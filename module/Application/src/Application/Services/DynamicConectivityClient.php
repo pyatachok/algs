@@ -12,6 +12,11 @@ use Application\UF\WeightedQuickUnion;
 class DynamicConectivityClient
 {
 	/**
+	 * Выбранный класс алгоритма.
+	 */
+	private $algorithmClass = 'QuickFind';
+
+	/**
 	 * массив соединений $p, $q  из файла
 	 * @var array
 	 */
@@ -23,7 +28,7 @@ class DynamicConectivityClient
 	 */
 	private $sizeN = 0;
 
-	private $algorithmClass = [
+	private $algorithmClasses = [
 		'QuickFind' => 'Application\UF\QuickFind',
 		'QuickUnion' => 'Application\UF\QuickUnion',
 		'QuickUnionWithPathCompression' => 'Application\UF\QuickUnionWithPathCompression',
@@ -45,15 +50,15 @@ class DynamicConectivityClient
 		error_reporting(E_ALL); ini_set('display_errors', 1);
 		if ( $fileHandle = fopen($inputFile, 'r'))
 		{
-			$algorithmClass =  (string) trim(fgets($fileHandle)) ;
+			$this->algorithmClass =  (string) trim(fgets($fileHandle)) ;
 			$this->sizeN = (int) fgets($fileHandle);
 			$index = 0;
-			if( !class_exists($this->algorithmClass[$algorithmClass]))
+			if( !class_exists($this->algorithmClasses[$this->algorithmClass]))
 			{
-				$algorithmClass = 'QuickUnion';
+				$this->algorithmClass = 'QuickFind';
 				echo 'Sorry could not find algorithm';
 			}
-			$ufClient = new $this->algorithmClass[$algorithmClass] ($this->getSizeN());
+			$ufClient = new $this->algorithmClasses[$this->algorithmClass] ($this->getSizeN());
 
 			while ( ( $buffer = fgets($fileHandle, 1024)) !== false)
 			{
@@ -127,6 +132,16 @@ class DynamicConectivityClient
 	public function getSizeN ()
 	{
 		return $this->sizeN;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAlgorithmClass()
+	{
+		$return = preg_replace('/([A-Z])/', ' $1', $this->algorithmClass);
+
+		return $return;
 	}
 
 }
