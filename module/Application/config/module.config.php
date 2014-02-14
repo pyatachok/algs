@@ -31,6 +31,20 @@ return array(
                 ),
             ),
 
+			'percolation' => array (
+				'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/percolation[/:action]',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+								'__NAMESPACE__' => 'Application\Controller',
+								'controller'    => 'Percolation',
+								'action'        => 'index',
+                            ),
+                        ),
+			),
 			'ajax' => array (
 				'type'    => 'Segment',
                         'options' => array(
@@ -108,6 +122,7 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
 			'Application\Controller\Ajax' => 'Application\Controller\AjaxController',
+			'Application\Controller\Percolation' => 'Application\Controller\PercolationController',
         ),
     ),
     'view_manager' => array(

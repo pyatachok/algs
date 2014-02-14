@@ -46,3 +46,7 @@ My styles
 .top-padded-xl { padding-top: 100px}
 
 .uf-form .uf-form-listed label { display: block }
+
+.percolation .open { background-color: #f2f2f2; }
+.percolation .full { background-color: #0077b3; }
+.percolation .closed { background-color: #2e3436;  }
