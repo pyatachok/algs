@@ -78,9 +78,15 @@ class Percolation
 						$this->alg -> union( $that, $neighbour);
 					}
 				}
-				if ( $this->isFull($i, $j) )
+				
+			}
+			
+			foreach ($this ->sites as $row => $siteRow )
+			{
+				foreach ($siteRow as $col => $site)
+				if ( $this->isFull($row, $col) && $this -> isOpen ( $row, $col ))
 				{
-					$this->sites[$i][$j] = 2;
+					$this->sites[$row][$col] = 2;
 				}
 			}
 		}
