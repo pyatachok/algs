@@ -75,7 +75,10 @@ class Percolation
 				{
 					if ( $neighbour >=0 && $neighbour < $this->virtualTopId )
 					{
-						$this->alg -> union( $that, $neighbour);
+						if ( ! $this -> alg -> connected ( $that, $neighbour ))
+						{
+							$this->alg -> union( $that, $neighbour);
+						}
 					}
 				}
 				

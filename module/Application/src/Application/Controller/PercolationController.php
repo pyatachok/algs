@@ -27,7 +27,7 @@ class PercolationController extends AbstractActionController
 		$percolationClient->open(2,2);
 		$percolationClient->open(3,5);
 		$percolationClient->open(0,4);
-//		$percolationClient->open(4,0);
+		$percolationClient->open(4,0);
 		$percolationClient->open(3,0);
 		$percolationClient->open(4,1);
 		$percolationClient->open(2,0);
