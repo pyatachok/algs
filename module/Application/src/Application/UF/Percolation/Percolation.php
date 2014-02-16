@@ -49,7 +49,7 @@ class Percolation
 
 		$this->virtualTopId = $N*$N;
 		$this->virtualBottomId = $this->virtualTopId+1;
-		$this->alg = new QuickUnion($this->virtualTopId+2);
+		$this->alg = new WeightedQuickUnion($this->virtualTopId+2);
 
 		$this->fillVirtualSites();
 	}
