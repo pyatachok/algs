@@ -49,7 +49,7 @@ class Percolation
 
 		$this->virtualTopId = $N*$N;
 		$this->virtualBottomId = $this->virtualTopId+1;
-		$this->alg = new WeightedQuickUnion($this->virtualTopId+2);
+		$this->alg = new QuickUnion($this->virtualTopId+2);
 
 		$this->fillVirtualSites();
 	}
@@ -73,14 +73,11 @@ class Percolation
 
 				foreach ( $neighbours as $neighbour )
 				{
-					if ( $neighbour >=0 && $neighbour < $this->N )
+					if ( $neighbour >=0 && $neighbour < $this->virtualTopId )
 					{
-						$this->alg -> union($neighbour, $that);
+						$this->alg -> union( $that, $neighbour);
 					}
 				}
-
-
-
 				if ( $this->isFull($i, $j) )
 				{
 					$this->sites[$i][$j] = 2;
@@ -116,7 +113,6 @@ class Percolation
 		if ( $this -> siteExists( $i, $j ) )
 		{
 			$that = (int) $i*$this->N + $j;
-			print_r(['isFull' , $i, $j,$that, $this->isFull($i, $j) ]);
 			return $this->alg -> connected($that, $this->virtualTopId);
 		}
 
@@ -175,45 +171,45 @@ class Percolation
 		$neighbours[] = ( $this->isOpen($i, $j - 1) 	? $i*$this->N + ($j - 1) 	: null );
 		$neighbours[] = ( $this->isOpen($i, $j + 1) 	? $i*$this->N + ($j + 1) 	: null );
 
-		echo '<pre>';
-		print_r(
-			[
-				'$i' => $i,
-				'$j' => $j,
-				'top' => [
-					'$i-1' => $i-1,
-					'$j' => $j,
-					'is open' => $this->isOpen($i-1, $j),
-					($i-1)*$this->N + $j
-				],
-				'bottom' => [
-					'$i+1' => $i+1,
-					'$j' => $j,
-					'is open' => $this->isOpen($i+1, $j),
-					($i+1)*$this->N + $j
-				],
-				'left' => [
-					'$i-1' => $i,
-					'$j' => $j-1,
-					'is open' => $this->isOpen($i, $j - 1),
-					($i)*$this->N + $j -1
-				],
-				'right' => [
-					'$i+1' => $i,
-					'$j' => $j+1,
-					'is open' => $this->isOpen($i, $j+1),
-					($i)*$this->N + $j+1
-				]
-			]
-		);
+//		echo '<pre>';
+//		print_r(
+//			[
+//				'$i' => $i,
+//				'$j' => $j,
+//				'top' => [
+//					'$i-1' => $i-1,
+//					'$j' => $j,
+//					'is open' => $this->isOpen($i-1, $j),
+//					($i-1)*$this->N + $j
+//				],
+//				'bottom' => [
+//					'$i+1' => $i+1,
+//					'$j' => $j,
+//					'is open' => $this->isOpen($i+1, $j),
+//					($i+1)*$this->N + $j
+//				],
+//				'left' => [
+//					'$i-1' => $i,
+//					'$j' => $j-1,
+//					'is open' => $this->isOpen($i, $j - 1),
+//					($i)*$this->N + $j -1
+//				],
+//				'right' => [
+//					'$i+1' => $i,
+//					'$j' => $j+1,
+//					'is open' => $this->isOpen($i, $j+1),
+//					($i)*$this->N + $j+1
+//				]
+//			]
+//		);
 
 
 		$neighbours = array_filter( $neighbours, function($item){
 				return ! is_null($item);
 			});
 
-		print_r($neighbours);
-		echo '</pre>';
+//		print_r($neighbours);
+//		echo '</pre>';
 		return $neighbours;
 	}
 }
