@@ -1,4 +1,14 @@
-<p>Size = <?php echo $this->size; ?></p>
+<div class="jumbotron ">
+	<h3 class="text-primary">Percolation system data.</h3>
+	<p class="text-muted">Size = <?php echo $this->size; ?></p>
+	<p class="text-muted">Expiration Time: <?php echo $this->timeDelta; ?> seconds</p>
+	<p class="text-muted">Memory Usage Start: <?php echo $this->memoryUsage['start'];?></p>
+	<p class="text-muted">Memory Usage Stop: <?php echo $this->memoryUsage['stop'];?></p>
+	<p class="text-muted">Memory Usage Delta: <?php echo
+			$this->memoryUsage['delta'] . ' B; '
+			. $this->memoryUsage['delta']/1024 .' Kb; '
+			. $this->memoryUsage['delta']/1024/1024 .' Mb;';?></p>
+</div>
 
 <?php foreach ( $this->percolations as $percolation ) : ?>
 

@@ -73,24 +73,20 @@ class Percolation
 
 				foreach ( $neighbours as $neighbour )
 				{
-					if ( $neighbour >=0 && $neighbour < $this->virtualTopId )
+					if ( $neighbour['that'] >=0 && $neighbour['that'] < $this->virtualTopId )
 					{
-						if ( ! $this -> alg -> connected ( $that, $neighbour ))
+						if ( ! $this -> alg -> connected ( $that, $neighbour['that'] ))
 						{
-							$this->alg -> union( $that, $neighbour);
+							$this->alg -> union( $that, $neighbour['that']);
 						}
 					}
 				}
-				
+
 			}
-			
-			foreach ($this ->sites as $row => $siteRow )
+
+			if ( $this->isFull($i, $j))
 			{
-				foreach ($siteRow as $col => $site)
-				if ( $this->isFull($row, $col) && $this -> isOpen ( $row, $col ))
-				{
-					$this->sites[$row][$col] = 2;
-				}
+				$this->doFullNeighbour($i, $j);
 			}
 		}
 	}
@@ -175,10 +171,10 @@ class Percolation
 
 	private function getOpenNeighbours($i, $j)
 	{
-		$neighbours[] = ( $this->isOpen($i-1, $j) 		? ($i-1)*$this->N + $j 		: null );
-		$neighbours[] = ( $this->isOpen($i+1, $j) 		? ($i+1)*$this->N + $j 		: null );
-		$neighbours[] = ( $this->isOpen($i, $j - 1) 	? $i*$this->N + ($j - 1) 	: null );
-		$neighbours[] = ( $this->isOpen($i, $j + 1) 	? $i*$this->N + ($j + 1) 	: null );
+		$neighbours[] = ( $this->isOpen($i-1, $j) 		? [ 'that' => ($i-1)*$this->N + $j, 'i' =>$i-1, 'j' => $j]  		: null );
+		$neighbours[] = ( $this->isOpen($i+1, $j) 		? [ 'that' => ($i+1)*$this->N + $j, 'i' =>$i+1, 'j' => $j] 		: null );
+		$neighbours[] = ( $this->isOpen($i, $j - 1) 	? [ 'that' => $i*$this->N + ($j - 1), 'i' => $i, 'j' => $j-1]	: null );
+		$neighbours[] = ( $this->isOpen($i, $j + 1) 	? [ 'that' => $i*$this->N + ($j + 1), 'i' => $i, 'j' => $j+1] 	: null );
 
 //		echo '<pre>';
 //		print_r(
@@ -220,5 +216,18 @@ class Percolation
 //		print_r($neighbours);
 //		echo '</pre>';
 		return $neighbours;
+	}
+
+	private function doFullNeighbour($i, $j)
+	{
+		$this->sites[$i][$j] = 2;
+
+		foreach ( $this->getOpenNeighbours($i, $j) as $neighbour )
+		{
+			if ( 2 != $this->sites[$neighbour['i']][$neighbour[j]])
+			{
+				$this->doFullNeighbour($neighbour['i'], $neighbour[j]);
+			}
+		}
 	}
 }

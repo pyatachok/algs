@@ -17,6 +17,8 @@ class PercolationController extends AbstractActionController
 {
     public function indexAction()
     {
+		$memoryStart = memory_get_usage(true);
+		$startTime = microtime(true);
 		$size = $this->params() -> fromQuery ('size', 5);
 		$percolationClient = new Percolation($size);
 		$percolations = [];
@@ -33,9 +35,18 @@ class PercolationController extends AbstractActionController
 				'percolates' => $percolationClient->percolates(),
 			];
 		}
+		$endTime = microtime(true);
+
+		$memoryStop = memory_get_usage(true);
         return new ViewModel([
 			'size' =>  $size,
-			'percolations' => $percolations
+			'percolations' => $percolations,
+			'timeDelta' => $endTime - $startTime,
+			'memoryUsage' =>[
+				'start' => $memoryStart,
+				'stop' => $memoryStop,
+				'delta' => $memoryStop - $memoryStart
+			]
 
 		]);
     }
