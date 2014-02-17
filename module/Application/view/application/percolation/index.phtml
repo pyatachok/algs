@@ -1,14 +1,17 @@
+<p>Size = <?php echo $this->size; ?></p>
+
+<?php foreach ( $this->percolations as $percolation ) : ?>
 
 <div class="row">
 	<div class="col-md-12">
-		<p>Size = <?php echo $this->size; ?></p>
+		<p>Open site number <?php echo $percolation['openNow'] ?></p>
 		<p class="bg-success">
-			System does <?php echo $this->percolates ? '' : 'not'; ?> percolates.
+			System does <?php echo $percolation['percolates'] ? '' : 'not'; ?> percolates.
 		</p>
 		<table class="table table-bordered percolation">
 		<tbody>
 		<?php $index = 0; ?>
-		<?php foreach ($this->sites as $row => $rowSites) : ?>
+		<?php foreach ($percolation['sites'] as $row => $rowSites) : ?>
 			<tr>
 				<?php foreach ($rowSites as $col => $site ): ?>
 				<td class="<?php echo ( $site===0 ? 'closed' : ($site===1 ? 'open' : 'full') ) ?>"> <?php echo $index; $index++; ?></td>
@@ -21,6 +24,7 @@
 	</div>
 
 </div>
+<?php endforeach ; ?>
 <div class="row">
 
     <div class="col-md-4">

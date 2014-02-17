@@ -17,28 +17,26 @@ class PercolationController extends AbstractActionController
 {
     public function indexAction()
     {
-		$size = 5;
-		error_reporting(E_ALL); ini_set('display_errors', 1);
+		$size = $this->params() -> fromQuery ('size', 5);
 		$percolationClient = new Percolation($size);
+		$percolations = [];
 
-		$percolationClient->open(0,1);
-		$percolationClient->open(1,1);
-		$percolationClient->open(2,1);
-		$percolationClient->open(2,2);
-		$percolationClient->open(3,5);
-		$percolationClient->open(0,4);
-		$percolationClient->open(4,0);
-		$percolationClient->open(3,0);
-		$percolationClient->open(4,1);
-		$percolationClient->open(2,0);
-		$percolationClient->open(3,3);
-		$percolationClient->open(4,3);
+		while ( false === $percolationClient->percolates() )
+		{
+			$randomI = rand(0, $size-1);
+			$randomJ = rand(0, $size-1);
+			$percolationClient->open($randomI, $randomJ);
 
-
+			$percolations[] = [
+				'openNow' => $randomI*$size+$randomJ,
+				'sites' => $percolationClient->draw(),
+				'percolates' => $percolationClient->percolates(),
+			];
+		}
         return new ViewModel([
 			'size' =>  $size,
-			'sites' => $percolationClient->draw(),
-			'percolates' => $percolationClient->percolates(),
+			'percolations' => $percolations
+
 		]);
     }
 
