@@ -7,6 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+
 return array(
     'router' => array(
         'routes' => array(
@@ -41,6 +42,20 @@ return array(
                             'defaults' => array(
 								'__NAMESPACE__' => 'Application\Controller',
 								'controller'    => 'Percolation',
+								'action'        => 'index',
+                            ),
+                        ),
+			),
+			'week2' => array (
+				'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/week2[/:action]',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+								'__NAMESPACE__' => 'Application\Controller',
+								'controller'    => 'Week2',
 								'action'        => 'index',
                             ),
                         ),
@@ -123,6 +138,7 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
 			'Application\Controller\Ajax' => 'Application\Controller\AjaxController',
 			'Application\Controller\Percolation' => 'Application\Controller\PercolationController',
+			'Application\Controller\Week2' => 'Application\Controller\Week2Controller',
         ),
     ),
     'view_manager' => array(
