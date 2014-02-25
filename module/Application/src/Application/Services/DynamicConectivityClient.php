@@ -47,7 +47,6 @@ class DynamicConectivityClient
 	 */
 	public function __construct($inputFile = 'public/txt/w1.txt' )
 	{
-		error_reporting(E_ALL); ini_set('display_errors', 1);
 		if ( $fileHandle = fopen($inputFile, 'r'))
 		{
 			$this->algorithmClass =  (string) trim(fgets($fileHandle)) ;
